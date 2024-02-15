@@ -1,0 +1,61 @@
+BEGIN TRANSACTION;
+
+DROP TABLE pages;
+CREATE TABLE pages (
+    'id' INTEGER PRIMARY KEY AUTOINCREMENT,
+    'author_id' INTEGER NOT NULL,
+    'content' TEXT NOT NULL,
+    'title' TEXT NOT NULL,
+    'creation_date' DATE NOT NULL,
+    'publication_date' DATE,
+    'status' TEXT NOT NULL
+);
+
+INSERT INTO pages VALUES (1,    1,  '[{"pos": 0,"type": "header","value": "Cibo per tutti"},{"pos": 1,"type": "paragraph","value": "Ciao a tutti oggi parleremo di cibo."},{"pos": 2,"type": "image","value": "food.jpg"}]',        
+                            'Food',      '2023-01-10',   '2024-04-18',   'scheduled');
+INSERT INTO pages VALUES (2,    2,  '[{"pos": 0,"type": "header","value": "Arte per tutti"},{"pos": 1,"type": "paragraph","value": "Ciao a tutti oggi parleremo di arte."},{"pos": 2,"type": "image","value": "art.jpg"}]',
+                            'Arte',     '2020-04-03',   '2020-06-07',   'published');
+INSERT INTO pages VALUES (3,    2,  '[{"pos": 0,"type": "header","value": "Sport per tutti"},{"pos": 1,"type": "paragraph","value": "Ciao a tutti oggi parleremo di sport."},{"pos": 2,"type": "image","value": "sport.jpg"}]',
+                            'Sport',  '2021-10-30',   '2022-01-14',   'published');
+INSERT INTO pages VALUES (4,    1,  '[{"pos": 0,"type": "header","value": "Scienza per tutti"},{"pos": 1,"type": "paragraph","value": "Ciao a tutti oggi parleremo di scienza."},{"pos": 2,"type": "image","value": "science.jpg"}]',
+                            'Scienza',    '2023-06-05',   '',             'draft');
+INSERT INTO pages VALUES (5,    1,  '[{"pos": 0,"type": "header","value": "Storia per tutti"},{"pos": 1,"type": "paragraph","value": "Ciao a tutti oggi parleremo di storia."}]',
+                            'Storia',  '2022-03-17',   '',             'draft');
+INSERT INTO pages VALUES (6,    3,  '[{"pos": 0,"type": "header","value": "Scuola per tutti"},{"pos": 1,"type": "paragraph","value": "Ciao a tutti oggi parleremo di scuola."}]',
+                            'Scuola',   '2023-02-28',   '2023-12-01',   'scheduled');
+
+DROP TABLE users;
+CREATE TABLE users (
+    'id' INTEGER PRIMARY KEY AUTOINCREMENT,
+    'username' TEXT NOT NULL,
+    'name' TEXT NOT NULL,
+    'salt' TEXT NOT NULL,
+    'password' TEXT NOT NULL,
+    'admin' INTEGER DEFAULT(0)
+);
+
+INSERT INTO users VALUES (1,    'alice@test.it',    'Alice',    'ifjvvierbiq0328h',     '6a84b4099ad8e7ce389afda2819451d84eb543e837c151a08f8d34d0f754456e15327c4ff9d59eb7711aa31342c7c6e75f181f012756078c07a9780d5865e1ae', 0);
+INSERT INTO users VALUES (2,    'bob@test.it',      'Bob',      'hbaxso2r728ibuj3',     '801ac3cc7eeef482612fc0189e3b9afd0f8dde21834703e2cc9955b07e3b631ded82746751fd3a8308e79bf5a96661255ae4cbfb0b615fcd35428d806f314e3d', 1);
+INSERT INTO users VALUES (3,    'lola@test.it',     'Lola',     'a354viuyc574s34s',     'c81a7db2463b0f16a260820d5197a5619c4346e0b211911d0058c76be5d2dfe40b73de28011e0bc15366b30809100a342fa4ced9d7be0b3b07a478ec880c6a59', 0);
+INSERT INTO users VALUES (4,    'trudy@test.it',    'Trudy',    'sxsjyhwcvff734q9',     'da435781270d63820c50eb0a0dc9fc5b7e9d2dfddafeb4068b3a32df43fbb0c38d594d9bbc9a48a9402e12d9fef662a18d21902cc4bad14c75bd7990f45417bc', 0);
+
+DROP TABLE title;
+CREATE TABLE title (
+    'id' INTEGER PRIMARY KEY AUTOINCREMENT,
+    'title' TEXT
+);
+
+INSERT INTO title VALUES (1, 'CSM mall');
+
+DROP TABLE images;
+CREATE TABLE images (
+    'id' INTEGER PRIMARY KEY AUTOINCREMENT,
+    'path' TEXT
+);
+
+INSERT INTO images VALUES (1, 'art.jpg');
+INSERT INTO images VALUES (2, 'food.jpg');
+INSERT INTO images VALUES (3, 'science.jpg');
+INSERT INTO images VALUES (4, 'sport.jpg');
+
+COMMIT;
